@@ -171,5 +171,5 @@
 		</pluginManagement>
 	</build>
 
-	<artifactId>graduation</artifactId>
+	<artifactId>graduation_design_sever</artifactId>
 </project>

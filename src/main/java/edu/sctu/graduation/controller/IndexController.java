@@ -1,17 +1,23 @@
 package edu.sctu.graduation.controller;
 
-import javax.servlet.http.HttpServletRequest;
+//@Controller
+//public class IndexController {
+//    @RequestMapping
+//    @ResponseBody
+//    public String index(HttpServletRequest req) {
+//        System.out.println("fsfterqweqrre");
+//        return "hello,world";
+//    }
+//}
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
+import org.springframework.web.bind.annotation.*;
+
+@RestController
 public class IndexController {
-	@RequestMapping
-	@ResponseBody
-	public String index(HttpServletRequest req) {
-		return "hello,world";
-
-	}
+    @RequestMapping(value = "/haha/{fsdfadf}",method = RequestMethod.POST)
+    public String index(@PathVariable  String username) {
+        System.out.println("haha");
+        return username;
+    }
 }

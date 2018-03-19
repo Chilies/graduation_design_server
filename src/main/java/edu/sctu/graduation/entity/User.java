@@ -13,6 +13,7 @@ public class User implements Serializable {
 	private Integer id;
 	private String nickName;
 	private String noteName;
+	private String pwd;
 	private String signature;
 	private String telephone;
 	private String gender;
@@ -20,7 +21,6 @@ public class User implements Serializable {
 	private String avatarId;
 	private String wishCardId;
 	private String friendId;
-	private String password;
 	private String alipayAccount;
 
 	public Integer getId() {
@@ -103,12 +103,12 @@ public class User implements Serializable {
 		this.friendId = friendId;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPwd() {
+		return pwd;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	public String getAlipayAccount() {

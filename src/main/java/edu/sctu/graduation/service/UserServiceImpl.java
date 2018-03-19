@@ -34,7 +34,6 @@ public class UserServiceImpl implements UserService {
                                  String password,
                                  String nickname,
                                  String alipayAccount) {
-
         ResponseData responseData = new ResponseData();
         if (StringUtils.isBlank(phoneNumber)
                 || StringUtils.isBlank(password)
@@ -56,7 +55,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setTelephone(phoneNumber);
         user.setNickName(nickname);
-        user.setPassword(password);
+        user.setPwd(password);
         user.setAlipayAccount(alipayAccount);
 
         try {
@@ -71,6 +70,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 登录
+     *
      * @param phoneNumber
      * @param password
      * @return
@@ -104,6 +104,7 @@ public class UserServiceImpl implements UserService {
             data.add(user);
             responseData.setData(data);
         }
+
         return responseData;
     }
 
