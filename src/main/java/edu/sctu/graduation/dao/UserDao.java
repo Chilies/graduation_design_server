@@ -8,7 +8,7 @@ import edu.sctu.graduation.entity.User;
 public interface UserDao extends JpaRepository<User, Integer> {
 
     @Query("from User where id=?1")
-    public User getUserById(String id);
+    public User getUserById(int id);
 
     @Query("from User where telephone=?1")
     public User getUserByPhone(String telephone);

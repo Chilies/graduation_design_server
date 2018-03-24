@@ -20,10 +20,10 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseData register(  String phoneNumber,
-                                  String password,
-                                  String nickname,
-                                  String alipayAccount) {
+    public ResponseData register(String phoneNumber,
+                                 String password,
+                                 String nickname,
+                                 String alipayAccount) {
 
         return userService.register(
                 DesUtils.decrypt(phoneNumber),
@@ -39,7 +39,6 @@ public class UserController {
      * @param password
      * @return
      */
-    @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseData login(String phoneNumber,
                               String password) {
@@ -65,4 +64,19 @@ public class UserController {
 
         return userService.editUser(phone, nickname, selfIntroduction, file);
     }
+
+    /**
+     * 更新用户头像
+     *
+     * @param userId
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "/update/avatar", method = RequestMethod.POST)
+    public ResponseData update(Integer userId,
+                               @RequestParam("file") MultipartFile file) {
+
+        return userService.updateAvatar(userId, file);
+    }
+
 }

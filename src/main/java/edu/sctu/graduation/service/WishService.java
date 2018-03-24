@@ -8,5 +8,15 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface WishService {
 
-    ResponseData publishOneWishCard(String phoneNumber,String Content, MultipartFile file, String price, String type);
+    ResponseData publishOneWishCard(
+            String phoneNumber,
+            String content,
+            String price,
+            String type,
+            MultipartFile file);
+
+    ResponseData getWishType();
+
+
+    ResponseData getAllWish();
 }

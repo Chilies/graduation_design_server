@@ -20,13 +20,24 @@ public class WishController {
     @Autowired
     private WishService wishService;
 
-    @RequestMapping(value = "/publish/one/wishCard",method = RequestMethod.POST)
+    @RequestMapping(value = "/publish/one/wishCard", method = RequestMethod.POST)
     public ResponseData publishOneWishCard(String phoneNumber,
                                            String content,
                                            String price,
                                            String type,
                                            @RequestParam("file") MultipartFile file) {
 
-        return wishService.publishOneWishCard(phoneNumber,content,file,price,type);
+        return wishService.publishOneWishCard(phoneNumber, content, price, type, file);
     }
+
+    @RequestMapping(value = "/publish/type", method = RequestMethod.GET)
+    public ResponseData getAllType() {
+        return wishService.getWishType();
+    }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public ResponseData getAllWish() {
+        return wishService.getAllWish();
+    }
+
 }

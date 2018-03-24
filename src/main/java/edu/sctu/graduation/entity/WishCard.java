@@ -14,7 +14,7 @@ public class WishCard implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int wishCardId;
     private String createTime;
     private String description;
     private String price;
@@ -22,16 +22,15 @@ public class WishCard implements Serializable {
     private int giverId;
     private int userId;
     private int avatarId;
-    private int wishCardImgId;
     private int replyId;
     private Timestamp deadline;
 
-    public int getId() {
-        return id;
+    public int getWishCardId() {
+        return wishCardId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setWishCardId(int wishCardId) {
+        this.wishCardId = wishCardId;
     }
 
     public String getCreateTime() {
@@ -88,14 +87,6 @@ public class WishCard implements Serializable {
 
     public void setAvatarId(int avatarId) {
         this.avatarId = avatarId;
-    }
-
-    public int getWishCardImgId() {
-        return wishCardImgId;
-    }
-
-    public void setWishCardImgId(int wishCardImgId) {
-        this.wishCardImgId = wishCardImgId;
     }
 
     public int getReplyId() {

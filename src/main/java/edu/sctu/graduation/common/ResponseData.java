@@ -1,15 +1,11 @@
 package edu.sctu.graduation.common;
 
-import java.util.List;
-
-
-
-public class ResponseData {
+public class ResponseData<T> {
 
 	private Integer code = 200;
 	private String msg = "success";
-	private List<Object> data;
-
+//	private List<Object> data;
+	private T data;
 
 	public Integer getCode() {
 		return code;
@@ -27,11 +23,19 @@ public class ResponseData {
 		this.msg = msg;
 	}
 
-	public List<Object> getData() {
+	public T getData() {
 		return data;
 	}
 
-	public void setData(List<Object> data) {
+	public void setData(T data) {
 		this.data = data;
 	}
+
+	//	public List<Object> getData() {
+//		return data;
+//	}
+//
+//	public void setData(List<Object> data) {
+//		this.data = data;
+//	}
 }

@@ -11,4 +11,5 @@ public interface UserService {
 
     ResponseData editUser(String phone, String nickname, String selfIntroduction, MultipartFile file);
 
+    ResponseData updateAvatar(Integer userId, MultipartFile avatarFile);
 }

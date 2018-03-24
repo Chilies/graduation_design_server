@@ -20,6 +20,8 @@ public class Constant {
     public static final Integer NOT_FOUND_CODE = 404;
     //文件上传根路径
     public static final String FILE_PATH = "/home/www/image/";
+    //图片访问路径
+    public static final String IMAGE_ACCESS_PATH = "http://swzheng.cn/image/";
     // 用户已存在
     public static final Integer USER_ALREADY_EXIST_CODE = 100;
 
@@ -29,7 +31,7 @@ public class Constant {
 
     public static final String REGISTER_ERROR_MSG = "注册失败";
     public static final String LOGIN_ERROR_MSG = "登陆失败";
-    public static final String PARAM_MSG = "参数错误";
+    public static final String PARAM_ERROR = "参数错误";
     public static final String USER_NOT_FOUND_MSG = "用户不存在";
     public static final String USER_ALREADY_EXIST_MSG = "用户已存在";
 
