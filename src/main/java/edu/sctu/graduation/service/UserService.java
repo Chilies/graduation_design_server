@@ -9,7 +9,16 @@ public interface UserService {
 
     ResponseData register(String phone, String pwd, String nickname, String alipayAccount);
 
-    ResponseData editUser(String phone, String nickname, String selfIntroduction, MultipartFile file);
-
     ResponseData updateAvatar(Integer userId, MultipartFile avatarFile);
+
+    ResponseData getArea();
+
+    ResponseData editUser(String nickname, String signature,String gender,String address,Integer userId);
+
+    ResponseData getUserPassword(Integer userId);
+
+    ResponseData updatePassword(String password, Integer userId);
+
+    ResponseData getAllUserInfo(Integer userId);
+
 }

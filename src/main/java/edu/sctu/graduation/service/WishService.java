@@ -17,6 +17,7 @@ public interface WishService {
 
     ResponseData getWishType();
 
-
     ResponseData getAllWish();
+
+    ResponseData getOneWishByWishCardId(Integer wishCardId);
 }

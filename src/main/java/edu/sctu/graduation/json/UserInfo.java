@@ -1,17 +1,13 @@
-package edu.sctu.graduation.entity;
+package edu.sctu.graduation.json;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "all_user")
-@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
-public class User implements Serializable {
+/**
+ * Created by zhengsenwen on 2018/4/9.
+ */
+public class UserInfo implements Serializable {
     public static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Integer id;
     private String nickName;
     private String pwd;
@@ -20,6 +16,8 @@ public class User implements Serializable {
     private String gender;
     private Integer religionId;
     private String alipayAccount;
+    private String province;
+
 
     public Integer getId() {
         return id;
@@ -35,6 +33,14 @@ public class User implements Serializable {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 
     public String getSignature() {
@@ -61,22 +67,12 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-
     public Integer getReligionId() {
         return religionId;
     }
 
     public void setReligionId(Integer religionId) {
         this.religionId = religionId;
-    }
-
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
     }
 
     public String getAlipayAccount() {
@@ -86,4 +82,14 @@ public class User implements Serializable {
     public void setAlipayAccount(String alipayAccount) {
         this.alipayAccount = alipayAccount;
     }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+
 }

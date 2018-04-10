@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface TypeDao extends JpaRepository<Type, Integer> {
 
-    @Query("select type from Type")
+      @Query("select type from Type")
     public List<String> getAllType();
 
 }

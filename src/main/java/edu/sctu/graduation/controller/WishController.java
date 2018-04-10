@@ -3,10 +3,7 @@ package edu.sctu.graduation.controller;
 import edu.sctu.graduation.common.ResponseData;
 import edu.sctu.graduation.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -39,5 +36,11 @@ public class WishController {
     public ResponseData getAllWish() {
         return wishService.getAllWish();
     }
+
+    @RequestMapping(value = "/{wishCardId}", method = RequestMethod.GET)
+    public ResponseData getOneWishCard(@PathVariable("wishCardId") int wishCardId) {
+        return wishService.getOneWishByWishCardId(wishCardId);
+    }
+
 
 }

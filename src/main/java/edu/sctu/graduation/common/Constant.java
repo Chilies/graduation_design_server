@@ -10,6 +10,8 @@ public class Constant {
     public static final Integer LOGIN_ERROR_CODE = 1;
     //失败
     public static final Integer ERROR_CODE = 2;
+    //用户上传收钱码失败
+    public static final Integer ALIPAY_ERROR_CODE = 3;
     //系统错误代码
     public static final Integer SYSTEM_ERROR_CODE = 500;
     //成功
@@ -25,6 +27,9 @@ public class Constant {
     // 用户已存在
     public static final Integer USER_ALREADY_EXIST_CODE = 100;
 
+
+    //用户已上传收钱码
+    public static final String ALIPAY_EXIST_MSG = "用户已上传过收钱码";
     //操作失败
     public static final String ERROR_MSG = "操作失败";
 
@@ -34,5 +39,6 @@ public class Constant {
     public static final String PARAM_ERROR = "参数错误";
     public static final String USER_NOT_FOUND_MSG = "用户不存在";
     public static final String USER_ALREADY_EXIST_MSG = "用户已存在";
+    public static final String PASSWORD_ERROR_MSG = "密码错误";
 
 }

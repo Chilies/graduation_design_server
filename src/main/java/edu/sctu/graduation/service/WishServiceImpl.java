@@ -47,7 +47,6 @@ public class WishServiceImpl implements WishService {
         typeList = typeDao.getAllType();
         List<Object> data = typeList.stream().collect(Collectors.toList());
         responseData.setData(data);
-
         return responseData;
     }
 
@@ -55,25 +54,43 @@ public class WishServiceImpl implements WishService {
     public ResponseData getAllWish() {
         ResponseData responseData = new ResponseData();
         List<Object[]> objectList = wishCardDao.getAllWish();
+        responseData.setData(convertObjects2Json(objectList));
+        return responseData;
+    }
+
+    private List<WishCardContentJson> convertObjects2Json(List<Object[]> objectList) {
         List<WishCardContentJson> data = new ArrayList<>();
-
-//        u.id,u.nickName,av.avatarSrc,wc.createTime,wc.description,wc.type,wci.wishCardImgSrc
         for (Object[] o : objectList) {
-            WishCardContentJson wishCardContentJson = new WishCardContentJson();
-
+            WishCardContentJson wishCardContentJson
+                    = new WishCardContentJson();
             wishCardContentJson.setId((Integer) o[0]);
             wishCardContentJson.setNickName(String.valueOf(o[1]));
             wishCardContentJson.setAvatarSrc(String.valueOf(o[2]));
             wishCardContentJson.setWishCardId((Integer) o[3]);
             wishCardContentJson.setCreateTime(String.valueOf(o[4]));
             wishCardContentJson.setDescription(String.valueOf(o[5]));
-            wishCardContentJson.setType(String.valueOf(o[6]));
-            wishCardContentJson.setWishCardImgSrc(String.valueOf(o[7]));
-
+            wishCardContentJson.setPrice((o[6]).toString());
+            wishCardContentJson.setType(String.valueOf(o[7]));
+            wishCardContentJson.setWishCardImgSrc(String.valueOf(o[8]));
             data.add(wishCardContentJson);
         }
+        return data;
+    }
 
-        responseData.setData(data);
+
+
+
+    @Override
+    public ResponseData getOneWishByWishCardId(Integer wishCardId) {
+        ResponseData responseData = new ResponseData();
+        if (null == wishCardId || wishCardId == 0) {
+            responseData.setCode(Constant.ERROR_CODE);
+            responseData.setMsg(Constant.PARAM_ERROR);
+            return responseData;
+        }
+        List<Object[]> wishCardContentJsonList
+                = wishCardDao.getOneWishCard(wishCardId);
+        responseData.setData(convertObjects2Json(wishCardContentJsonList));
         return responseData;
     }
 
@@ -89,9 +106,9 @@ public class WishServiceImpl implements WishService {
         String fileName = "";
 
         if (StringUtils.isBlank(content)
-                && StringUtils.isBlank(price)
-                && StringUtils.isBlank(type)
-                && file == null) {
+                || StringUtils.isBlank(price)
+                || StringUtils.isBlank(type)
+                || file == null) {
             responseData.setCode(Constant.ERROR_CODE);
             responseData.setMsg(Constant.PARAM_ERROR);
             return responseData;
@@ -107,18 +124,12 @@ public class WishServiceImpl implements WishService {
         //time userId price content type img
         WishCard wishCard = new WishCard();
         WishCardImg wishCardImg = new WishCardImg();
-
         wishCard.setCreateTime(createTime);
         wishCard.setUserId(user.getId());
-        if (price != null && !"".equals(price)) {
-            wishCard.setPrice(price);
-        }
-        if (content != null && !"".equals(content)) {
-            wishCard.setDescription(content);
-        }
-        if (type != null && !"".equals(type)) {
-            wishCard.setType(type);
-        }
+        wishCard.setPrice(price);
+        wishCard.setDescription(content);
+        wishCard.setType(type);
+
         if (file != null) {
             fileName = phoneNumber + createTime + ".jpg";
             String filePath = Constant.FILE_PATH;
@@ -127,9 +138,11 @@ public class WishServiceImpl implements WishService {
                 dir.mkdirs();
             }
             try {
-                FileUtil.uploadFile(file.getBytes(), filePath, fileName);
+                FileUtil.uploadFile(file.getBytes(),
+                        filePath, fileName);
             } catch (Exception e) {
-                System.out.println("error: " + "file upload failed.");
+                System.out.println("error: "
+                        + "file upload failed.");
                 responseData.setCode(Constant.SYSTEM_ERROR_CODE);
                 responseData.setMsg(Constant.ERROR_MSG);
                 e.printStackTrace();
@@ -137,19 +150,20 @@ public class WishServiceImpl implements WishService {
         } else {
             System.out.println("file is null");
         }
-
+        //将心愿单的内容添加到wish_card表中
         wishCard.setDescription(content);
         wishCardDao.saveAndFlush(wishCard);
-
-        WishCard wishCardData = wishCardDao.getOne(wishCard.getWishCardId());
+        WishCard wishCardData = wishCardDao
+                .getOne(wishCard.getWishCardId());
         List<Object> data = new ArrayList<>();
         data.add(wishCardData);
         responseData.setData(data);
 
-        wishCardImg.setWishCardImgSrc(Constant.IMAGE_ACCESS_PATH + fileName);
+        //将心愿单的图片访问路径存到wish_card_img表中
+        wishCardImg.setWishCardImgSrc(Constant
+                .IMAGE_ACCESS_PATH + fileName);
         wishCardImg.setWishCardId(wishCard.getWishCardId());
         wishCardImgDao.saveAndFlush(wishCardImg);
-
 
         return responseData;
     }

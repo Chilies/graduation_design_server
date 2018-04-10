@@ -5,10 +5,11 @@ import edu.sctu.graduation.service.UserService;
 import edu.sctu.graduation.utils.DesUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/user")
@@ -47,24 +48,6 @@ public class UserController {
                 DesUtils.decrypt(password));
     }
 
-
-    /**
-     * 修改用户信息
-     *
-     * @param req
-     * @return
-     */
-    @RequestMapping(value = "update", method = RequestMethod.POST)
-//    @ResponseBody
-    public ResponseData update(@RequestParam("file") MultipartFile file,
-                               HttpServletRequest req) {
-        String phone = req.getParameter("phone");
-        String nickname = req.getParameter("nickname");
-        String selfIntroduction = req.getParameter("selfIntroduction");
-
-        return userService.editUser(phone, nickname, selfIntroduction, file);
-    }
-
     /**
      * 更新用户头像
      *
@@ -78,5 +61,37 @@ public class UserController {
 
         return userService.updateAvatar(userId, file);
     }
+
+    @RequestMapping(value = "/area", method = RequestMethod.GET)
+    public ResponseData getUserArea() {
+        return userService.getArea();
+    }
+
+
+    @RequestMapping(value = "/update/info", method = RequestMethod.POST)
+    public ResponseData update(String nickname,
+                               String signature,
+                               String gender,
+                               String address,
+                               Integer userId) {
+        return userService.editUser(nickname, signature, gender, address, userId);
+    }
+
+    @RequestMapping(value = "/password", method = RequestMethod.GET)
+    public ResponseData update(Integer userId) {
+        System.out.println(userId);
+        return userService.getUserPassword(userId);
+    }
+
+    @RequestMapping(value = "/update/password", method = RequestMethod.POST)
+    public ResponseData update(String password, Integer userId) {
+        return userService.updatePassword(password, userId);
+    }
+
+    @RequestMapping(value = "/all/info", method = RequestMethod.POST)
+    public ResponseData getUserAllInfo(Integer userId) {
+        return userService.getAllUserInfo(userId);
+    }
+
 
 }
