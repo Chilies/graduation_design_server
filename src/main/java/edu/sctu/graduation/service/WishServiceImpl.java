@@ -72,12 +72,11 @@ public class WishServiceImpl implements WishService {
             wishCardContentJson.setPrice((o[6]).toString());
             wishCardContentJson.setType(String.valueOf(o[7]));
             wishCardContentJson.setWishCardImgSrc(String.valueOf(o[8]));
+            wishCardContentJson.setAlipayReceiveCode(String.valueOf(o[9]));
             data.add(wishCardContentJson);
         }
         return data;
     }
-
-
 
 
     @Override
