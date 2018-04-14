@@ -48,7 +48,6 @@ public class ReplyServiceImpl implements ReplyService {
         if (null != toUserId) {
             reply.setToUserId(toUserId);
         }
-//        reply.setToUserId(toUserId);
         reply.setDescription(description);
         replyDao.saveAndFlush(reply);
 
@@ -86,10 +85,6 @@ public class ReplyServiceImpl implements ReplyService {
             commentJson.setDescription(String.valueOf(o[2]));
             commentJson.setWishCardId((Integer) (o[3]));
             commentJson.setFromUserId((Integer) (o[4]));
-//            if (null == o[5] || "".equals(o[5]) || "null".equals(o[5])) {
-//            } else {
-//                commentJson.setToUserId((Integer) o[5]);
-//            }
             commentJson.setToUserId((Integer) o[5]);
             commentJson.setFromUserNickName(String.valueOf(o[6]));
             commentJson.setToUserNickName(String.valueOf(o[7]));

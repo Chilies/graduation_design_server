@@ -234,20 +234,19 @@ public class UserServiceImpl implements UserService {
         List<UserInfo> userInfoList = new ArrayList<>();
         for (Object[] o : objects) {
             UserInfo userInfo = new UserInfo();
-            userInfo.setId((Integer)(o[0]));
+            userInfo.setId((Integer) (o[0]));
             userInfo.setNickName(String.valueOf(o[1]));
             userInfo.setPwd(String.valueOf(o[2]));
             userInfo.setSignature(String.valueOf(o[3]));
             userInfo.setTelephone(String.valueOf(o[4]));
             userInfo.setGender(String.valueOf(o[5]));
-            userInfo.setReligionId((Integer)(o[6]));
+            userInfo.setReligionId((Integer) (o[6]));
             userInfo.setAlipayAccount(String.valueOf(o[7]));
             userInfo.setProvince(String.valueOf(o[8]));
             userInfoList.add(userInfo);
         }
         return userInfoList;
     }
-
 
     @Override
     public ResponseData updateAvatar(Integer userId,

@@ -1,6 +1,7 @@
 package edu.sctu.graduation.dao;
 
 import edu.sctu.graduation.entity.User;
+import edu.sctu.graduation.json.ContactFriend;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,10 +10,14 @@ import java.util.List;
 
 public interface UserDao extends JpaRepository<User, Integer> {
 
-//    select u.*,a.province from all_user u , area a where u.religion_id = a.id and u.id = 19
+
+
+//    select u.*, (select a.province from area a where a.id = u.religion_id) as province
+//    from all_user u where u.id = 12
     @Query("SELECT u.id,u.nickName,u.pwd,u.signature,u.telephone,u.gender," +
-            " u.religionId,u.alipayAccount,a.province " +
-            "FROM User u , Area a  where u.religionId = a.id and u.id = ?1")
+            " u.religionId,u.alipayAccount," +
+            "(select a.province from Area a where a.id = u.religionId) as province " +
+            "FROM User u where u.id = ?1")
     public List<Object[]> getUserAllInfo(Integer id);
 
     @Query("from User where telephone=?1")
@@ -37,5 +42,7 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Modifying
     @Query("UPDATE User u SET u.pwd=?1 WHERE u.id=?2")
     public void updatePassword(String password, Integer userId);
+
+
 
 }

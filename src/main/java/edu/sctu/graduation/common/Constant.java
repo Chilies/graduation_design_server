@@ -41,4 +41,9 @@ public class Constant {
     public static final String USER_ALREADY_EXIST_MSG = "用户已存在";
     public static final String PASSWORD_ERROR_MSG = "密码错误";
 
+    //单方关注
+    public static final Integer NOT_FELLOW_CODE = 0;
+    //互相关注
+    public static final Integer BOTH_FELLOW_CODE = 1;
+
 }
