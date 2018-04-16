@@ -7,6 +7,7 @@ import edu.sctu.graduation.common.ResponseData;
 import edu.sctu.graduation.dao.FriendDao;
 import edu.sctu.graduation.entity.Friend;
 import edu.sctu.graduation.json.ContactFriend;
+import edu.sctu.graduation.json.AllFriend;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class FriendServiceImpl implements FriendService {
     }
 
     @Override
-    public ResponseData getContactFriend(String phoneListJsonString) {
+    public ResponseData getContactFriend(Integer userId, String phoneListJsonString) {
         ResponseData responseData = new ResponseData();
         if (StringUtils.isBlank(phoneListJsonString)) {
             responseData.setCode(Constant.ERROR_CODE);
@@ -55,13 +56,28 @@ public class FriendServiceImpl implements FriendService {
 
         List<ContactFriend> contactFriendList = new ArrayList<>();
         for (String phone : stringList) {
-            List<Object[]> objects = friendDao.getContactFriend(phone);
+            List<Object[]> objects = friendDao.getContactFriend(userId, phone);
             contactFriendList.addAll(convertObjects2Json(objects));
         }
         responseData.setData(contactFriendList);
         return responseData;
 
     }
+
+    private List<ContactFriend> convertObjects2Json(List<Object[]> objectList) {
+        List<ContactFriend> data = new ArrayList<>();
+        for (Object[] o : objectList) {
+            ContactFriend contactFriend = new ContactFriend();
+            contactFriend.setId((Integer) o[0]);
+            contactFriend.setNickName(String.valueOf(o[1]));
+            contactFriend.setPhoneNumber(String.valueOf(o[2]));
+            contactFriend.setAvatarSrc(String.valueOf(o[3]));
+            contactFriend.setFellowStatus((Integer)o[4]);
+            data.add(contactFriend);
+        }
+        return data;
+    }
+
 
     @Override
     public ResponseData fellowFriend(Integer userId, Integer friendId) {
@@ -97,16 +113,33 @@ public class FriendServiceImpl implements FriendService {
         return responseData;
     }
 
-    private List<ContactFriend> convertObjects2Json(List<Object[]> objectList) {
-        List<ContactFriend> data = new ArrayList<>();
+
+    @Override
+    public ResponseData getAllFellowedFriend(Integer userId) {
+        ResponseData responseData = new ResponseData();
+        if (userId == null) {
+            responseData.setCode(Constant.ERROR_CODE);
+            responseData.setMsg(Constant.PARAM_ERROR);
+            return responseData;
+        }
+
+        List<Object[]> objects = friendDao.getAllFellowedFriend(userId);
+        responseData.setData(convertObjects2MyALLFriendList(objects));
+
+        return responseData;
+    }
+
+    private List<AllFriend> convertObjects2MyALLFriendList(List<Object[]> objectList) {
+        List<AllFriend> data = new ArrayList<>();
         for (Object[] o : objectList) {
-            ContactFriend contactFriend = new ContactFriend();
-            contactFriend.setId((Integer) o[0]);
-            contactFriend.setNickName(String.valueOf(o[1]));
-            contactFriend.setPhoneNumber(String.valueOf(o[2]));
-            contactFriend.setAvatarSrc(String.valueOf(o[3]));
-            data.add(contactFriend);
+            AllFriend allFriend = new AllFriend();
+            allFriend.setId((Integer) o[0]);
+            allFriend.setNickName(String.valueOf(o[1]));
+            allFriend.setFellowStatus((Integer) o[2]);
+            allFriend.setAvatarSrc(String.valueOf(o[3]));
+            data.add(allFriend);
         }
         return data;
     }
+
 }

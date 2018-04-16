@@ -25,9 +25,9 @@ public class FriendController {
 
 
     @RequestMapping(value = "/contact/friend", method = RequestMethod.POST)
-    public ResponseData getContactFriend(String phoneListJsonString) {
+    public ResponseData getContactFriend(Integer userId, String phoneListJsonString) {
         System.out.println("friend" + phoneListJsonString);
-        return friendService.getContactFriend(phoneListJsonString);
+        return friendService.getContactFriend(userId, phoneListJsonString);
     }
 
 
@@ -35,6 +35,12 @@ public class FriendController {
     public ResponseData fellowFriend(Integer userId, Integer friendId) {
         System.out.println("friend" + userId + friendId);
         return friendService.fellowFriend(userId, friendId);
+    }
+
+    @RequestMapping(value = "/all/fellow", method = RequestMethod.GET)
+    public ResponseData getAllFellowedFriend(Integer userId) {
+        System.out.println("fellow" + userId);
+        return friendService.getAllFellowedFriend(userId);
     }
 
 }

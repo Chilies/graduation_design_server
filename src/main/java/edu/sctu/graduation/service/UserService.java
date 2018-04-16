@@ -13,12 +13,14 @@ public interface UserService {
 
     ResponseData getArea();
 
-    ResponseData editUser(String nickname, String signature,String gender,String address,Integer userId);
+    ResponseData editUser(String nickname, String signature, String gender, String address, Integer userId);
 
     ResponseData getUserPassword(Integer userId);
 
     ResponseData updatePassword(String password, Integer userId);
 
     ResponseData getAllUserInfo(Integer userId);
+
+
 
 }

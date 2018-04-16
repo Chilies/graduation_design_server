@@ -10,8 +10,11 @@ public interface FriendService {
 
     ResponseData getAllUserPhone();
 
-    ResponseData getContactFriend(String phoneListJsonString);
+    ResponseData getContactFriend(Integer userId, String phoneListJsonString);
 
     ResponseData fellowFriend(Integer userId, Integer friendId);
+
+
+    ResponseData getAllFellowedFriend(Integer userId);
 
 }
