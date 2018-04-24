@@ -158,7 +158,8 @@ public class UserServiceImpl implements UserService {
             responseData.setMsg(Constant.ERROR_MSG);
             return responseData;
         }
-        userDao.updateUser(nickname, signature, gender, Integer.valueOf(areaId), userId);
+        userDao.updateUser(nickname, signature, gender,
+                Integer.valueOf(areaId), userId);
         List<Object[]> objects = userDao.getUserAllInfo(userId);
         if (objects.size() == 0) {
             responseData.setCode(Constant.NOT_FOUND_CODE);

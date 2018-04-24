@@ -52,8 +52,6 @@ public class FriendServiceImpl implements FriendService {
                 new TypeReference<List<String>>() {
                 }.getType());
 
-        System.out.println("friend222" + stringList.size());
-
         List<ContactFriend> contactFriendList = new ArrayList<>();
         for (String phone : stringList) {
             List<Object[]> objects = friendDao.getContactFriend(userId, phone);
@@ -72,7 +70,7 @@ public class FriendServiceImpl implements FriendService {
             contactFriend.setNickName(String.valueOf(o[1]));
             contactFriend.setPhoneNumber(String.valueOf(o[2]));
             contactFriend.setAvatarSrc(String.valueOf(o[3]));
-            contactFriend.setFellowStatus((Integer)o[4]);
+            contactFriend.setFellowStatus((Integer) o[4]);
             data.add(contactFriend);
         }
         return data;
@@ -87,7 +85,12 @@ public class FriendServiceImpl implements FriendService {
             responseData.setMsg(Constant.PARAM_ERROR);
             return responseData;
         }
-
+        Friend isFellowFriend = friendDao.checkIsFellow(userId, friendId);
+        if (isFellowFriend != null) {
+            responseData.setCode(Constant.ERROR_CODE);
+            responseData.setMsg(Constant.ALREADY_FELLOWED_MSG);
+            return responseData;
+        }
         Integer fellowStatus;
         Friend friend = friendDao.checkFellowStatus(friendId, userId);
         if (friend == null) {
@@ -102,7 +105,6 @@ public class FriendServiceImpl implements FriendService {
         friendSave.setUserId(userId);
         friendSave.setFriendId(friendId);
         friendSave.setFellowStatus(fellowStatus);
-
         friendDao.saveAndFlush(friendSave);
 
         Friend friendData = friendDao.getOne(friendSave.getId());

@@ -19,5 +19,10 @@ public interface WishService {
 
     ResponseData getAllWish();
 
+    ResponseData getAllFriendWish(Integer userId);
+
     ResponseData getOneWishByWishCardId(Integer wishCardId);
+
+    ResponseData getUserWish(Integer userId);
+
 }

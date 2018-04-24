@@ -37,10 +37,21 @@ public class WishController {
         return wishService.getAllWish();
     }
 
+    @RequestMapping(value = "/friend", method = RequestMethod.GET)
+    public ResponseData getFriendWish(Integer userId) {
+        return wishService.getAllFriendWish(userId);
+    }
+
     @RequestMapping(value = "/{wishCardId}", method = RequestMethod.GET)
-    public ResponseData getOneWishCard(@PathVariable("wishCardId") int wishCardId) {
+    public ResponseData getOneWishCard(@PathVariable("wishCardId") Integer wishCardId) {
         return wishService.getOneWishByWishCardId(wishCardId);
     }
+
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    public ResponseData getSomeOneWish(@PathVariable("userId") Integer userId) {
+        return wishService.getUserWish(userId);
+    }
+
 
 
 }

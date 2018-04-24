@@ -2,7 +2,6 @@ package edu.sctu.graduation.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.security.Timestamp;
 
 /**
  * Created by zhengsenwen on 2018/3/19.
@@ -14,22 +13,18 @@ public class WishCard implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int wishCardId;
+    private Integer wishCardId;
     private String createTime;
     private String description;
     private String price;
     private String type;
-    private int giverId;
-    private int userId;
-    private int avatarId;
-    private int replyId;
-    private Timestamp deadline;
+    private Integer userId;
 
-    public int getWishCardId() {
+    public Integer getWishCardId() {
         return wishCardId;
     }
 
-    public void setWishCardId(int wishCardId) {
+    public void setWishCardId(Integer wishCardId) {
         this.wishCardId = wishCardId;
     }
 
@@ -65,43 +60,12 @@ public class WishCard implements Serializable {
         this.type = type;
     }
 
-    public int getGiverId() {
-        return giverId;
-    }
-
-    public void setGiverId(int giverId) {
-        this.giverId = giverId;
-    }
-
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public int getAvatarId() {
-        return avatarId;
-    }
-
-    public void setAvatarId(int avatarId) {
-        this.avatarId = avatarId;
-    }
-
-    public int getReplyId() {
-        return replyId;
-    }
-
-    public void setReplyId(int replyId) {
-        this.replyId = replyId;
-    }
-
-    public Timestamp getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Timestamp deadline) {
-        this.deadline = deadline;
-    }
 }

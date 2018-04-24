@@ -11,7 +11,6 @@ import java.util.List;
 public interface UserDao extends JpaRepository<User, Integer> {
 
 
-
 //    select u.*, (select a.province from area a where a.id = u.religion_id) as province
 //    from all_user u where u.id = 12
     @Query("SELECT u.id,u.nickName,u.pwd,u.signature,u.telephone,u.gender," +
@@ -43,6 +42,8 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Query("UPDATE User u SET u.pwd=?1 WHERE u.id=?2")
     public void updatePassword(String password, Integer userId);
 
-
+    //    select f.friend_id from friend f where f.user_id = 19
+    @Query("SELECT f.friendId from Friend f where f.userId=?1")
+    public List<Integer> getUserFriend(Integer userId);
 
 }

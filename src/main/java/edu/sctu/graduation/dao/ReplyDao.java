@@ -11,7 +11,8 @@ import java.util.List;
  */
 public interface ReplyDao extends JpaRepository<Reply, Integer> {
 
-//
+
+
 //    select r.*,
 //    (select u0.nick_name from all_user u0 where u0.id = r.from_user_id) nickname0,
 //    (select u1.nick_name from all_user u1 where u1.id = r.to_user_id) nickname1

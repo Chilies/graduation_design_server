@@ -15,7 +15,6 @@ public class Avatar  implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer avatarId;
     private Integer userId;
-    private Integer wishCardId;
     private String avatarSrc;
 
 
@@ -35,13 +34,6 @@ public class Avatar  implements Serializable {
         this.userId = userId;
     }
 
-    public Integer getWishCardId() {
-        return wishCardId;
-    }
-
-    public void setWishCardId(Integer wishCardId) {
-        this.wishCardId = wishCardId;
-    }
 
     public String getAvatarSrc() {
         return avatarSrc;

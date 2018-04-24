@@ -58,6 +58,27 @@ public class WishServiceImpl implements WishService {
         return responseData;
     }
 
+    @Override
+    public ResponseData getAllFriendWish(Integer userId) {
+        ResponseData responseData = new ResponseData();
+        if (userId == 0) {
+            responseData.setCode(Constant.ERROR_CODE);
+            responseData.setMsg(Constant.PARAM_ERROR);
+            return responseData;
+        }
+        List<Integer> friendList = userDao.getUserFriend(userId);
+
+        List<WishCardContentJson> wishCardContentJsonList = new ArrayList<>();
+        for (Integer friendId : friendList) {
+            List<Object[]> objects = wishCardDao.getAllFriendWish(friendId);
+            wishCardContentJsonList.addAll(convertObjects2Json(objects));
+        }
+        List<Object[]> objectList = wishCardDao.getAllFriendWish(userId);
+        wishCardContentJsonList.addAll(convertObjects2Json(objectList));
+        responseData.setData(wishCardContentJsonList);
+        return responseData;
+    }
+
     private List<WishCardContentJson> convertObjects2Json(List<Object[]> objectList) {
         List<WishCardContentJson> data = new ArrayList<>();
         for (Object[] o : objectList) {
@@ -90,6 +111,20 @@ public class WishServiceImpl implements WishService {
         List<Object[]> wishCardContentJsonList
                 = wishCardDao.getOneWishCard(wishCardId);
         responseData.setData(convertObjects2Json(wishCardContentJsonList));
+        return responseData;
+    }
+
+    @Override
+    public ResponseData getUserWish(Integer userId) {
+        ResponseData responseData = new ResponseData();
+        if (null == userId || userId == 0) {
+            responseData.setCode(Constant.ERROR_CODE);
+            responseData.setMsg(Constant.PARAM_ERROR);
+            return responseData;
+        }
+        List<Object[]> objectList = wishCardDao.getUserWish(userId);
+        responseData.setData(convertObjects2Json(objectList));
+
         return responseData;
     }
 

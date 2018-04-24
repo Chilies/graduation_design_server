@@ -29,6 +29,9 @@ public interface FriendDao extends JpaRepository<Friend, Integer> {
             " FROM User u where u.telephone = ?2")
     public List<Object[]> getContactFriend(Integer userId , String phoneNumber);
 
+    //    select * from friend where  friend_id = 21 and user_id  = 20
+    @Query("from Friend where userId = ?1 and friendId = ?2")
+    public Friend checkIsFellow(Integer userId, Integer friendId);
 
     //    select * from friend where  friend_id = 21 and user_id  = 20
     @Query("from Friend where userId = ?1 and friendId = ?2")
